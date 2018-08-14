@@ -1,0 +1,17 @@
+{
+    "name": "Assinatura",
+    "plural": "assinaturas",
+    "base": "Model",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+      
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
+  

@@ -1,0 +1,32 @@
+{
+    "name": "Cartao",
+    "plural": "cartoes",
+    "base": "Model",
+    "idInjection": true,
+    "options": {
+      "validateUpsert": true
+    },
+    "properties": {
+      "numero": {
+        "type": "string",
+        "required": true
+      },
+      "expiracao_mes": {
+        "type": "number",
+        "required": true
+      },
+      "expiracao_ano": {
+        "type": "number",
+        "required": true
+      },
+      "cvv": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": {}
+  }
+  
