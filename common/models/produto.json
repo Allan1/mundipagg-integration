@@ -10,14 +10,16 @@
     "tipo": {
       "type": "string",
       "required": true
-    },
-    "plano_id": {
-      "type": "string",
-      "required": true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "plano": {
+      "type": "belongsTo",
+      "model": "Plano",
+      "foreignKey": "plano_id"
+    }
+  },
   "acls": [],
   "methods": {}
 }

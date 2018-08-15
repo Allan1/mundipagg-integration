@@ -51,5 +51,21 @@
   "Produto": {
     "dataSource": "db",
     "public": true
+  },
+  "Plano": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Pedido": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "create": true
+        }
+      }
+    }
   }
 }

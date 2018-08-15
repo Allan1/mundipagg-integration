@@ -17,7 +17,10 @@
     },
     "email": {
       "type": "string",
-      "required": true
+      "required": true,
+      "index": {
+        "unique": true
+      }
     }
   },
   "validations": [],
@@ -30,6 +33,16 @@
         "validate": true,
         "forceId": false
       }
+    },
+    "assinaturas": {
+      "type": "hasMany",
+      "model": "Assinatura",
+      "foreignKey": "cliente_id"
+    },
+    "pedidos": {
+      "type": "hasMany",
+      "model": "Pedido",
+      "foreignKey": "cliente_id"
     }
   },
   "acls": [],

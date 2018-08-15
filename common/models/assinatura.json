@@ -7,10 +7,29 @@
       "validateUpsert": true
     },
     "properties": {
-      
     },
     "validations": [],
-    "relations": {},
+    "relations": {
+      "plano": {
+        "type": "belongsTo",
+        "model": "Plano",
+        "foreignKey": "plano_id"
+      },
+      "cliente": {
+        "type": "belongsTo",
+        "model": "Cliente",
+        "foreignKey": "cliente_id"
+      },
+      "assinaturaCartao": {
+        "type": "embedsOne",
+        "model": "Cartao",
+        "property": "cartao",
+        "options": {
+          "validate": true,
+          "forceId": false
+        }
+      }
+    },
     "acls": [],
     "methods": {}
   }

@@ -1,0 +1,39 @@
+{
+  "name": "PlanoItem",
+  "plural": "planoitens",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true
+    },
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "quantidade": {
+      "type": "number",
+      "required": true
+    },
+    "ciclos": {
+      "type": "number"
+    },
+    "preco": {
+      "type": "number",
+      "required": true
+    },
+    "tipo_preco": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,42 @@
+{
+  "name": "Plano",
+  "plural": "Planos",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true
+    },
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "intervalo": {
+      "type": "string"
+    },
+    "contador_intervalo": {
+      "type": "number"
+    },
+    "dias_teste": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "planoItens": {
+      "type": "embedsMany",
+      "model": "PlanoItem",
+      "property": "itens",
+      "options": {
+        "validate": false,
+        "forceId": false
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

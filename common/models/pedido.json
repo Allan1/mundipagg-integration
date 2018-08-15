@@ -1,0 +1,30 @@
+{
+  "name": "Pedido",
+  "plural": "Pedidos",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+  },
+  "validations": [],
+  "relations": {
+    "cliente": {
+      "type": "belongsTo",
+      "model": "Cliente",
+      "foreignKey": "cliente_id"
+    },
+    "pedidoProdutos": {
+      "type": "embedsMany",
+      "model": "Produto",
+      "property": "produtos",
+      "options": {
+        "validate": false,
+        "forceId": false
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
