@@ -25,14 +25,10 @@
   },
   "validations": [],
   "relations": {
-    "clienteCartao": {
-      "type": "embedsOne",
+    "cartoes": {
+      "type": "hasMany",
       "model": "Cartao",
-      "property": "cartao",
-      "options": {
-        "validate": true,
-        "forceId": false
-      }
+      "foreignKey": "cliente_id"
     },
     "assinaturas": {
       "type": "hasMany",

@@ -1,6 +1,6 @@
 {
   "name": "Pedido",
-  "plural": "Pedidos",
+  "plural": "pedidos",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -14,6 +14,11 @@
       "type": "belongsTo",
       "model": "Cliente",
       "foreignKey": "cliente_id"
+    },
+    "cartao": {
+      "type": "belongsTo",
+      "model": "Cartao",
+      "foreignKey": "cartao_id"
     },
     "pedidoProdutos": {
       "type": "embedsMany",

@@ -3,14 +3,28 @@
 var Mundipagg = require('../services/mundipagg');
 
 module.exports = function(Assinatura) {
+  Assinatura.validatesPresenceOf('cliente_id');
+  Assinatura.validatesPresenceOf('cartao_id');
+  Assinatura.validatesPresenceOf('plano_id');
+
   Assinatura.observe('persist', function(ctx, next) {
     if (ctx.isNewInstance === true) {
-      Mundipagg.createSubscriptionFromAssinatura(ctx.data, function(err, data) {
-        if (!err) {
-          ctx.data.id = data.id;
+      Assinatura.app.models.Cartao.findById(ctx.data.cartao_id, function(err, cartao) {
+        if (err) {
+          next(err);
+        } else {
+          let data = ctx.data;
+          data.cartao = cartao;
+          Mundipagg.createSubscriptionFromAssinatura(data, function(err, subscription) {
+            if (!err) {
+              ctx.data.id = subscription.id;
+            }
+            next(err);
+          });
         }
-        next(err);
       });
+    } else {
+      next();
     }
   });
 };

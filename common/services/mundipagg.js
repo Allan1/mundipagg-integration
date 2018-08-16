@@ -163,4 +163,20 @@ module.exports = {
     };
   },
 
+  createCardFromCartao: function(cartao, cb) {
+    this.post(
+      '/customers/' + cartao.cliente_id + '/cards',
+      this.parseCardFromCartao(cartao),
+      cb
+    );
+  },
+
+  updateCardFromCartao: function(cartao, cb) {
+    this.put(
+      '/customers/' + cartao.cliente_id + '/cards',
+      this.parseCardFromCartao(cartao),
+      cb
+    );
+  },
+
 };

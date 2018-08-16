@@ -24,14 +24,10 @@
         "model": "Cliente",
         "foreignKey": "cliente_id"
       },
-      "assinaturaCartao": {
-        "type": "embedsOne",
+      "cartao": {
+        "type": "belongsTo",
         "model": "Cartao",
-        "property": "cartao",
-        "options": {
-          "validate": true,
-          "forceId": false
-        }
+        "foreignKey": "cartao_id"
       }
     },
     "acls": [],

@@ -1,12 +1,16 @@
 {
     "name": "Cartao",
     "plural": "cartoes",
-    "base": "Model",
-    "idInjection": true,
+    "base": "PersistedModel",
+    "idInjection": false,
     "options": {
       "validateUpsert": true
     },
     "properties": {
+      "id": {
+        "type": "string",
+        "id": true
+      },
       "numero": {
         "type": "string",
         "required": true
@@ -29,7 +33,13 @@
       }
     },
     "validations": [],
-    "relations": {},
+    "relations": {
+      "cliente": {
+        "type": "belongsTo",
+        "model": "Cliente",
+        "foreignKey": "cliente_id"
+      }
+    },
     "acls": [],
     "methods": {}
   }
