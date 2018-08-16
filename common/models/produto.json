@@ -18,6 +18,11 @@
       "type": "belongsTo",
       "model": "Plano",
       "foreignKey": "plano_id"
+    },
+    "assinatura": {
+      "type": "belongsTo",
+      "model": "Assinatura",
+      "foreignKey": "assinatura_id"
     }
   },
   "acls": [],

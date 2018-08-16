@@ -33,7 +33,14 @@ module.exports = function(Assinatura) {
   });
 
   Assinatura.cancel = function(ctx, cb) {
-
+    Mundipagg.cancelSubscription(ctx.instance.id, function(err, status) {
+      if (err) {
+        cb(err);
+      } else {
+        ctx.instance.status = status;
+        ctx.instance.save(cb);
+      }
+    });
   };
 
   Assinatura.remoteMethod(
@@ -42,12 +49,11 @@ module.exports = function(Assinatura) {
       description: 'Cancela a assinatura indicada',
       accepts: [
         {arg: 'ctx', type: 'object', http: {source: 'context'}},
-        {arg: 'data', type: 'Cartao', description: 'Data'},
       ],
       returns: {
-        arg: 'data', type: 'Cartao', root: true,
+        arg: 'data', type: 'Assinatura', root: true,
       },
-      http: {path: '/cancela', verb: 'post'},
+      http: {path: '/cancela', verb: 'delete'},
     }
   );
 };

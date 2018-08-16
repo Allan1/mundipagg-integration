@@ -32,6 +32,30 @@ module.exports = {
     return schemeType;
   },
 
+  parseSubscriptionStatus: function(status) {
+    switch (status) {
+      case 'ativo':
+        status = 'active';
+        break;
+      case 'cancelado':
+        status = 'canceled';
+        break;
+    }
+    return status;
+  },
+
+  parseAssinuaturaStatus: function(status) {
+    switch (status) {
+      case 'active':
+        status = 'ativo';
+        break;
+      case 'canceled':
+        status = 'cancelado';
+        break;
+    }
+    return status;
+  },
+
   call: function(method, path, data, cb) {
     let self = this;
     let options = this.getRequestBaseOptions();
@@ -88,6 +112,10 @@ module.exports = {
 
   put: function(path, data, cb) {
     this.call('PUT', path, data, cb);
+  },
+
+  patch: function(path, data, cb) {
+    this.call('PATCH', path, data, cb);
   },
 
   delete: function(path, data, cb) {
@@ -175,6 +203,27 @@ module.exports = {
       '/customers/' + cartao.cliente_id + '/cards',
       this.parseCardFromCartao(cartao),
       cb
+    );
+  },
+
+  updateSubscriptionCard: function(subscriptionId, cardId, cb) {
+    this.patch(
+      '/subscriptions/' + subscriptionId + '/card/',
+      {card_id: cardId},
+      cb
+    );
+  },
+
+  cancelSubscription: function(subscriptionId, cb) {
+    this.delete(
+      '/subscriptions/' + subscriptionId,
+      function(err, subscription) {
+        if (err) {
+          cb(err);
+        } else {
+          cb(err, this.parseAssinuaturaStatus(subscription.status));
+        }
+      }
     );
   },
 

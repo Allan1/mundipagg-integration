@@ -41,16 +41,21 @@ module.exports = function(Pedido) {
 
       Promise.all(produtos.map(async (produto) => {
         if (produto.tipo === 'plano') {
-          return await app.models.Assinatura.create({
+          let assinatura = await app.models.Assinatura.create({
             cliente_id: ctx.data.cliente_id,
             plano_id: produto.plano_id,
             cartao_id: ctx.data.cartao_id,
           });
+          produto.assinatura_id = assinatura.id;
+          return produto;
         } else {
           return Promise.resolve(); 
         }
       }))
-      .then(()=>{next()})
+      .then((newProdutos)=>{
+        ctx.data.produtos = newProdutos;
+        next();
+      })
       .catch((err)=>{next(err)});
     }
   });
