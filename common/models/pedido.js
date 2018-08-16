@@ -16,12 +16,18 @@ module.exports = function(Pedido) {
             next(err);
           } else {
             ctx.args.data.cliente_id = cliente.id;
-            cliente.cartoes.create(ctx.args.data.cartao,function(err, cartao) {
-              if (!err) {
-                ctx.args.data.cartao_id = cartao.id;
-              }
-              next(err);
-            });
+
+            if(ctx.args.data.cartao) {
+              cliente.cartoes.create(ctx.args.data.cartao,function(err, cartao) {
+                if (!err) {
+                  ctx.args.data.cartao_id = cartao.id;
+                }
+                next(err);
+              });
+            } else {
+              next();
+            }
+
           }
         });
     } else {

@@ -149,7 +149,6 @@ module.exports = {
       payment_method: 'credit_card',
       card: this.parseCardFromCartao(assinatura.cartao),
     };
-    console.log('subscription', subscription);
     this.post('/subscriptions', subscription, cb);
   },
 

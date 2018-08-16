@@ -45,7 +45,9 @@
           "*": false,
           "find": true,
           "create": true,
-          "prototype.replaceCard": true
+          "replaceCard": true,
+          "prototype.__create__cartoes": true,
+          "prototype.__get__assinaturas": true
         }
       }
     }
