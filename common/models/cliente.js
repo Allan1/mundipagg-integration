@@ -16,11 +16,5 @@ module.exports = function(Cliente) {
       Mundipagg
         .updateCustomerFromCliente(ctx.currentInstance.id, ctx.data, next);
     }
-  	/* var da ta = ctx.instance ? ctx.instance : ctx.data;
-  	if (ctx.instance) {
-  		ctx.instance = data;
-	  } else if(ctx.data){
-	    ctx.data = data;
-	  } */
   });
 };

@@ -142,4 +142,25 @@ module.exports = {
     this.put('/plans', plan, cb);
   },
 
+  createSubscriptionFromAssinatura: function(assinatura, cb) {
+    let subscription = {
+      plan_id: assinatura.plano_id,
+      customer_id: assinatura.cliente_id,
+      payment_method: 'credit_card',
+      card: this.parseCardFromCartao(assinatura.cartao),
+    };
+    console.log('subscription', subscription);
+    this.post('/subscriptions', subscription, cb);
+  },
+
+  parseCardFromCartao: function(cartao) {
+    return {
+      number: cartao.numero,
+      exp_month: cartao.expiracao_mes,
+      exp_year: cartao.expiracao_ano,
+      cvv: cartao.cvv,
+      holder_name: cartao.titular,
+    };
+  },
+
 };

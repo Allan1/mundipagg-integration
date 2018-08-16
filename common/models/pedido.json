@@ -20,7 +20,6 @@
       "model": "Produto",
       "property": "produtos",
       "options": {
-        "validate": false,
         "forceId": false
       }
     }

@@ -7,6 +7,7 @@ module.exports = function(Pedido) {
   Pedido.beforeRemote('create', function(ctx, instance, next) {
     if (ctx.args && ctx.args.data && ctx.args.data.cliente) {
       ctx.args.data.cliente.cartao = ctx.args.data.cartao;
+      ctx.args.data.cliente.cartao.titular = ctx.args.data.cliente.nome;
       Pedido.app.models.Cliente
         .findOrCreate(ctx.args.data.cliente, function(err, cliente) {
           if (!err) {
@@ -22,17 +23,20 @@ module.exports = function(Pedido) {
   Pedido.observe('persist', function(ctx, next) {
     if (ctx.isNewInstance === true) {
       let produtos = ctx.data.produtos || [];
-      produtos.forEach(function(produto) {
+
+      Promise.all(produtos.map(async (produto) => {
         if (produto.tipo === 'plano') {
-          app.models.Assinatura.create({
+          return await app.models.Assinatura.create({
             cliente_id: ctx.data.cliente_id,
-            plano_id: ctx.data.plano_id,
+            plano_id: produto.plano_id,
             cartao: ctx.data.cartao,
           });
+        } else {
+          return Promise.resolve(); 
         }
-      });
-
-      next();
+      }))
+      .then(()=>{next()})
+      .catch((err)=>{next(err)});
     }
   });
 };

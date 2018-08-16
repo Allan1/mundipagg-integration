@@ -2,11 +2,15 @@
     "name": "Assinatura",
     "plural": "assinaturas",
     "base": "PersistedModel",
-    "idInjection": true,
+    "idInjection": false,
     "options": {
       "validateUpsert": true
     },
     "properties": {
+      "id": {
+        "type": "string",
+        "id": true
+      }
     },
     "validations": [],
     "relations": {

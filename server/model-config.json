@@ -46,11 +46,19 @@
   },
   "Assinatura": {
     "dataSource": "db",
-    "public": true
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "find": true
+        }
+      }
+    }
   },
   "Produto": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "transient",
+    "public": false
   },
   "Plano": {
     "dataSource": "db",
@@ -63,7 +71,8 @@
       "remoting": {
         "sharedMethods": {
           "*": false,
-          "create": true
+          "create": true,
+          "find": true
         }
       }
     }

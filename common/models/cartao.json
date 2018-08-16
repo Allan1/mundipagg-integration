@@ -11,6 +11,10 @@
         "type": "string",
         "required": true
       },
+      "titular": {
+        "type": "string",
+        "required": true
+      },
       "expiracao_mes": {
         "type": "number",
         "required": true
