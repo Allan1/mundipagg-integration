@@ -3,6 +3,8 @@
 var Mundipagg = require('../services/mundipagg');
 
 module.exports = function(Cliente) {
+  //Cliente.nestRemoting('assinaturas');
+
   Cliente.observe('persist', function(ctx, next) {
     if (ctx.isNewInstance === true) {
       Mundipagg.createCustomerFromCliente(ctx.data, function(err, data) {

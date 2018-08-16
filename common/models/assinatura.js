@@ -27,4 +27,23 @@ module.exports = function(Assinatura) {
       next();
     }
   });
+
+  Assinatura.cancel = function(ctx, cb) {
+
+  };
+
+  Assinatura.remoteMethod(
+    'prototype.cancel',
+    {
+      description: 'Cancela a assinatura indicada',
+      accepts: [
+        {arg: 'ctx', type: 'object', http: {source: 'context'}},
+        {arg: 'data', type: 'Cartao', description: 'Data'},
+      ],
+      returns: {
+        arg: 'data', type: 'Cartao', root: true,
+      },
+      http: {path: '/cancela', verb: 'post'},
+    }
+  );
 };
