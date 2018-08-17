@@ -32,6 +32,22 @@ module.exports = {
     return schemeType;
   },
 
+  parseInterval: function(intervalo) {
+    let interval = 'month';
+    switch (intervalo) {
+      case 'diario':
+        interval = 'day';
+        break;
+      case 'semanal':
+        interval = 'week';
+        break;
+      case 'anual':
+        interval = 'year';
+        break;
+    }
+    return interval;
+  },
+
   parseSubscriptionStatus: function(status) {
     switch (status) {
       case 'ativo':
@@ -141,7 +157,7 @@ module.exports = {
   createPlanFromPlano: function(plano, cb) {
     let plan = {
       name: plano.nome,
-      interval: plano.intervalo,
+      interval: this.parseInterval(plano.intervalo),
       interval_count: plano.contador_intervalo,
       trial_period_days: plano.dias_teste,
       items: [],
@@ -163,7 +179,7 @@ module.exports = {
   updatePlanFromPlano: function(plano, cb) {
     let plan = {
       name: plan.nome,
-      interval: plan.intervalo,
+      interval: this.parseInterval(plano.intervalo),
       interval_count: plan.contador_intervalo,
       trial_period_days: plan.dias_teste,
     };

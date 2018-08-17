@@ -46,7 +46,7 @@ describe('Case 3', () => {
       .post('/api/planos')
       .send({
         'nome': planoNome,
-        'intervalo': 'month',
+        'intervalo': 'mensal',
         'contador_intervalo': 3,
         'dias_teste': 1,
         'itens': [

@@ -3,20 +3,20 @@ version: '2'
 services:
   app:
     build: .
-    image: mundipaggi_api
+    image: mundipagg_api
     ports:
       - "3000:3000"
     depends_on:
       - mongo
     network_mode: "host"
-    container_name: mundipaggi_api_container
+    container_name: mundipagg_api_container
     command: forever server/server.js
     env_file: .env
   mongo:
     image: mongo:3
     ports:
       - "27017:27017"
-    container_name: mundipaggi_mongo_container
+    container_name: mundipagg_mongo_container
     command: --auth
     env_file: .env
     environment:

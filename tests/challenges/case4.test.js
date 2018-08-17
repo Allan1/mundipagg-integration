@@ -42,7 +42,7 @@ describe('Case 4', () => {
               .post('/api/planos')
               .send({
                 'nome': 'Sarnarflix ' + Date.now(),
-                'intervalo': 'month',
+                'intervalo': 'mensal',
                 'contador_intervalo': 1,
                 'dias_teste': 1,
                 'itens': [

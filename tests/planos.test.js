@@ -15,7 +15,7 @@ describe('POST /api/planos', () => {
       .post('/api/planos')
       .send({
         'nome': 'PlanA',
-        'intervalo': 'month',
+        'intervalo': 'mensal',
         'contador_intervalo': 1,
         'dias_teste': 1,
         'itens': [
