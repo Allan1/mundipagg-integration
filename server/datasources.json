@@ -6,14 +6,5 @@
   "transient": {
     "name": "transient",
     "connector": "transient"
-  },
-  "mongo": {
-    "host": "localhost",
-    "port": 27017,
-    "database": "${MONGO_INITDB_DATABASE}",
-    "password": "${MONGO_INITDB_ROOT_PASSWORD}",
-    "name": "mongo",
-    "user": "${MONGO_INITDB_ROOT_USERNAME}",
-    "connector": "mongodb"
   }
 }

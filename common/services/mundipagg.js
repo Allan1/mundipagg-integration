@@ -118,8 +118,8 @@ module.exports = {
     this.call('PATCH', path, data, cb);
   },
 
-  delete: function(path, data, cb) {
-    this.call('DELETE', path, data, cb);
+  delete: function(path, cb) {
+    this.call('DELETE', path, {}, cb);
   },
 
   createCustomerFromCliente: function(cliente, cb) {
@@ -215,13 +215,14 @@ module.exports = {
   },
 
   cancelSubscription: function(subscriptionId, cb) {
+    let self = this;
     this.delete(
       '/subscriptions/' + subscriptionId,
       function(err, subscription) {
         if (err) {
           cb(err);
         } else {
-          cb(err, this.parseAssinuaturaStatus(subscription.status));
+          cb(err, self.parseAssinuaturaStatus(subscription.status));
         }
       }
     );

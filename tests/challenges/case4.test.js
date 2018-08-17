@@ -96,6 +96,7 @@ describe('Case 4', () => {
       .then(response => {
         assert.ok(response.body.id);
         let newCartaoId = response.body.id;
+        console.log('newCartaoId', newCartaoId);
 
         /* return request(app)
           .get('/api/clientes/' + clienteId + '/assinaturas/')

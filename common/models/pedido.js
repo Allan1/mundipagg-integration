@@ -64,10 +64,35 @@ module.exports = function(Pedido) {
       )
       .then((newProdutos)=>{
         ctx.data.produtos = newProdutos;
-        console.log('produtos:::', ctx.data.produtos);
         next();
       })
       .catch((err)=>{ next(err); });
+    }
+  });
+
+  Pedido.observe('after save', function(ctx, next) {
+    if (ctx.isNewInstance) {
+      Pedido.findById(ctx.instance.id, function(err, instance) {
+        if (!err) {
+          ctx.instance = instance;
+        }
+        next();
+      });
+    } else {
+      next();
+    }
+  });
+
+  Pedido.afterRemote('create', function(ctx, instance, cb) {
+    if (instance) {
+      instance.reload(function(err, reloaded) {
+        if (!err) {
+          ctx.result = reloaded;
+        }
+        cb(err);
+      });
+    } else {
+      cb();
     }
   });
 };

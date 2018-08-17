@@ -34,5 +34,6 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {
+  }
 }

@@ -32,7 +32,7 @@ module.exports = function(Assinatura) {
     }
   });
 
-  Assinatura.cancel = function(ctx, cb) {
+  Assinatura.prototype.cancel = function(ctx, cb) {
     Mundipagg.cancelSubscription(ctx.instance.id, function(err, status) {
       if (err) {
         cb(err);
@@ -51,9 +51,9 @@ module.exports = function(Assinatura) {
         {arg: 'ctx', type: 'object', http: {source: 'context'}},
       ],
       returns: {
-        arg: 'data', type: 'Assinatura', root: true,
+        type: 'Assinatura', root: true,
       },
-      http: {path: '/cancela', verb: 'delete'},
+      http: {verb: 'delete', path: '/cancela'},
     }
   );
 };

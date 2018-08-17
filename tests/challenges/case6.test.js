@@ -38,7 +38,7 @@ describe('Case 6', () => {
           .post('/api/pedidos')
           .send({
             'cliente': {
-              'nome': 'Mario' + faker.name.lastName(),
+              'nome': 'Mario ' + faker.name.lastName(),
               'email': 'mario@gmail.com',
             },
             'cartao': {
