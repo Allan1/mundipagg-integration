@@ -3,7 +3,11 @@
 var Mundipagg = require('../services/mundipagg');
 
 module.exports = function(Cliente) {
-  // Cliente.nestRemoting('assinaturas');
+  var rgPtAlphabet = /[A-Za-záàâãéèêìíîïòóôõöúùûçñÁÀÂÃÉÈÊÌÍÏÎÒÓÔÕÖÙÚÛÇÑ ]+$/;
+  Cliente.validatesFormatOf(
+    'nome',
+    {with: rgPtAlphabet, message: 'Nome may only contain letters and space'}
+  );
 
   Cliente.observe('persist', function(ctx, next) {
     if (ctx.isNewInstance === true) {

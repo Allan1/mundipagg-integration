@@ -27,6 +27,7 @@
 
 - Para o escopo desse projeto, foram implementados somente os métodos necessários para cobrir os casos de 1 a 6.
 - Nomes dos modelos e seus atributos foram escritos em português para seguir os exemplos de entrada. Normalmente, seriam implementados em inglês.
+- Como no exemplo de input do cartão não é informado o nome do titular, o nome do cliente é copiado para ser usado como nome do titular pois o parâmetro é obrigatório para a criação do cartão no Mundipagg. Para atender a validação do cartão o nome do cliente só pode conter letras com acentuação ou não. A acentuação é removida ao atribuir ao nome do titular.
 
 ## API
 

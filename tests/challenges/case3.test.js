@@ -5,6 +5,7 @@ const request = require('supertest');
 var assert = require('assert');
 var faker = require('faker');
 const app = require('../../server/server');
+var f = require('../utils/format');
 
 jest.setTimeout(30000);
 
@@ -16,7 +17,7 @@ describe('Case 3', () => {
     return request(app)
       .post('/api/clientes')
       .send({
-        'nome': 'Pedro ' + faker.name.lastName(),
+        'nome': 'Pedro ' + f.removeNonAlpha(faker.name.lastName()),
         'email': faker.internet.email(),
       })
       .expect(200)
