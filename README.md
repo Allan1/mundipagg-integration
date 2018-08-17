@@ -1,32 +1,39 @@
-# MundiPagg Integration
-- API for integrating to MundiPagg, an payment platform.
-- Built with Loopback.js
+# Integração MundiPagg
+- API para integração à plataforma de pagamento MundiPagg.
+- Feita com [Loopback.js](https://loopback.io/)
 
-## Project requirements
-- Docker
-- Docker Compose
+## Requisitos do projeto
+- [Docker](https://docs.docker.com/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Project setup
+## Configuração
 
-- Define environment variables in the .env file. See .env.example for environment variables names.
-- Start with: docker-compose up -d
-- Stop with: docker-compose down
-- Default api endpoint: http://localhost:3000/api/
-- Explore api at (visible for debugging purposes): http://localhost:3000/explorer/
+- Defina as variaveis de ambiente no arquivo .env. Veja .env.example como arquivo de configuração de exemplo.
+- Inicia com: docker-compose up -d (Usar flag --build para refletir mudanças)
+- Encerra com: docker-compose down
+- Endpoint padrão da api: http://localhost:3000/api/ (Configuração de host, porta em [server/config.json](https://loopback.io/doc/en/lb3/config.json.html))
+- Explore a api em (visível somente para debug): http://localhost:3000/explorer/
 
-## Testing
+## Teste
 
-- Tests made with Jest
-- Steps to test:
-  - docker exect -it mundipagg_api_container bash
-  - npm test
+- Testes feitos com [Jest](https://jestjs.io/)
+- Code Linting com [ESLint](https://eslint.org/)
+- Passos:
+  - docker exect -it mundipagg_api_container bash (Acessa o container da api)
+  - npm test [caminho] (roda os testes para o caminho informado ou todos, caso o caminho seja omitido)
+- Observação: o teste tests/challenges/case6.test.js falha por questão de concorrência nas requisições do script. Porém o caso de uso 6 é coberto na aplicação e pode ser testado manualmente.
+
+## Premissas e observações
+
+- Para o escopo desse projeto, foram implementados somente os métodos necessários para cobrir os casos de 1 a 6.
+- Nomes dos modelos e seus atributos foram escritos em português para seguir os exemplos de entrada. Normalmente, seriam implementados em inglês.
 
 ## API
 
 - POST /clientes/
   
-  Creates client.
-  Examples:
+  Cria cliente.
+  Exemplos:
 
   ```
   {
@@ -37,8 +44,8 @@
 
 - POST /clientes/{cliente_id}/cartoes
   
-  Add card to client.
-  Examples:
+  Adiciona cartão ao cliente.
+  Exemplos:
 
   ```
   {
@@ -51,8 +58,8 @@
 
 - POST /clientes/alteraCartao
   
-  Add card and use it on client's subscriptions.
-  Examples:
+  Adiciona cartão e usa para as assinaturas do cliente.
+  Exemplos:
 
   ```
   {
@@ -68,10 +75,10 @@
 
 - POST /planos/
 
-  Creates plan.
-  Examples:
+  Cria um plano.
+  Exemplos:
 
-  Some monthly plan.
+  Algum plano mensal.
 
   ```
   {
@@ -90,8 +97,8 @@
   }
   ```
 
-  Quartely plan for R$69,90.
-  'contador_intervalo' defines recurrency period according to 'intervalo'.
+  Plano trimestral por R$69,90.
+  'contador_intervalo' define a recorrência para o 'intervalo' informado.
 
   ```
   {
@@ -110,8 +117,8 @@
   }
   ```
 
-  Package with regular plan + book. First month for R$164,40, following months for R$24,50.
-  Property 'ciclos' defines how many times an item will be charged on this plan.
+  Pacote com plano regular + livro. Primeiro mês por R$164,40, meses seguintes por R$24,50.
+  Propriedade 'ciclos' define quantas vezes o item será cobrado neste plano, omitir para indicar cobrança até a assinatura ser cancelada.
 
   ```
   {
@@ -139,10 +146,10 @@
 
 - POST /pedidos/
 
-  Creates subscription.
-  Examples:
+  Cria assinatura(s). Outros tipos de produtos não são tratados por não caberem no escopo do projeto.
+  Exemplos:
 
-  Subscribes new customer to some plan.
+  Assina cliente no plano informado.
 
   ```
   {
@@ -165,7 +172,7 @@
   }
   ```
 
-  Subscribes existing customer to some plan.
+  Assina cliente existente no plano informado.
 
   ```
   {
@@ -188,6 +195,6 @@
 
 - DELETE /assinaturas/{assinatura_id}/cancela
 
-  Cancels the subscription.
+  Cancela a assinatura.
 
   
