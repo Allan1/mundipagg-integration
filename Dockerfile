@@ -1,4 +1,4 @@
-FROM allanoliveira/loopback:latest
+FROM allanoliveira/loopback:node-8.11.4
 
 RUN npm install forever -g
 

@@ -1,10 +1,12 @@
-/* global beforeAll */
+/* global beforeAll, jest */
 'use strict';
 
 const request = require('supertest');
 var assert = require('assert');
 var faker = require('faker');
 const app = require('../../server/server');
+
+jest.setTimeout(30000);
 
 describe('Case 3', () => {
   let clienteId = null;
@@ -75,7 +77,7 @@ describe('Case 3', () => {
           })
           .expect(200)
           .then(response => {
-            assert.ok(response.body.produtos[0].plano_id, planoId);
+            assert.equal(response.body.produtos[0].plano_id, planoId);
           });
       });
   });

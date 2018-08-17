@@ -2,5 +2,8 @@
   "extends": "loopback",
   "rules": {
     "camelcase": ["error", {"properties": "never"}]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017
   }
 }

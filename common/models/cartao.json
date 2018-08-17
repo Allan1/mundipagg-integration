@@ -1,46 +1,45 @@
 {
-    "name": "Cartao",
-    "plural": "cartoes",
-    "base": "PersistedModel",
-    "idInjection": false,
-    "options": {
-      "validateUpsert": true
+  "name": "Cartao",
+  "plural": "cartoes",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true
     },
-    "properties": {
-      "id": {
-        "type": "string",
-        "id": true
-      },
-      "numero": {
-        "type": "string",
-        "required": true
-      },
-      "titular": {
-        "type": "string",
-        "required": true
-      },
-      "expiracao_mes": {
-        "type": "number",
-        "required": true
-      },
-      "expiracao_ano": {
-        "type": "number",
-        "required": true
-      },
-      "cvv": {
-        "type": "string",
-        "required": true
-      }
+    "numero": {
+      "type": "string",
+      "required": true
     },
-    "validations": [],
-    "relations": {
-      "cliente": {
-        "type": "belongsTo",
-        "model": "Cliente",
-        "foreignKey": "cliente_id"
-      }
+    "titular": {
+      "type": "string",
+      "required": true
     },
-    "acls": [],
-    "methods": {}
-  }
-  
+    "expiracao_mes": {
+      "type": "number",
+      "required": true
+    },
+    "expiracao_ano": {
+      "type": "number",
+      "required": true
+    },
+    "cvv": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "cliente": {
+      "type": "belongsTo",
+      "model": "Cliente",
+      "foreignKey": "cliente_id"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

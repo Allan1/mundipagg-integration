@@ -17,17 +17,17 @@ module.exports = function(Pedido) {
           } else {
             ctx.args.data.cliente_id = cliente.id;
 
-            if(ctx.args.data.cartao) {
-              cliente.cartoes.create(ctx.args.data.cartao,function(err, cartao) {
-                if (!err) {
-                  ctx.args.data.cartao_id = cartao.id;
-                }
-                next(err);
-              });
+            if (ctx.args.data.cartao) {
+              cliente.cartoes
+                .create(ctx.args.data.cartao, function(err, cartao) {
+                  if (!err) {
+                    ctx.args.data.cartao_id = cartao.id;
+                  }
+                  next(err);
+                });
             } else {
               next();
             }
-
           }
         });
     } else {
@@ -39,24 +39,35 @@ module.exports = function(Pedido) {
     if (ctx.isNewInstance === true) {
       let produtos = ctx.data.produtos || [];
 
-      Promise.all(produtos.map(async (produto) => {
-        if (produto.tipo === 'plano') {
-          let assinatura = await app.models.Assinatura.create({
-            cliente_id: ctx.data.cliente_id,
-            plano_id: produto.plano_id,
-            cartao_id: ctx.data.cartao_id,
-          });
-          produto.assinatura_id = assinatura.id;
-          return produto;
-        } else {
-          return Promise.resolve(); 
-        }
-      }))
+      Promise.all(
+        produtos.map(async function(produto) {
+          if (produto.tipo === 'plano') {
+            let produtoUpdated = await new Promise(function(resolve, reject) {
+              app.models.Assinatura.create({
+                cliente_id: ctx.data.cliente_id,
+                plano_id: produto.plano_id,
+                cartao_id: ctx.data.cartao_id,
+              }, function(err, assinatura) {
+                if (err) {
+                  reject(err);
+                } else {
+                  produto.assinatura_id = assinatura.id;
+                  resolve(produto);
+                }
+              });
+            });
+            return produtoUpdated;
+          } else {
+            return Promise.resolve();
+          }
+        })
+      )
       .then((newProdutos)=>{
         ctx.data.produtos = newProdutos;
+        console.log('produtos:::', ctx.data.produtos);
         next();
       })
-      .catch((err)=>{next(err)});
+      .catch((err)=>{ next(err); });
     }
   });
 };

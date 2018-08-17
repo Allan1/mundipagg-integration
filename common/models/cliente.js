@@ -38,16 +38,25 @@ module.exports = function(Cliente) {
                 Promise.all(assinaturas.map((assinatura) => {
                   // assinatura.cartao_id = cartao.id;
                   return new Promise(function(resolve, reject) {
-                    Mundipagg.updateSubscriptionCard(assinatura.id, cartao.id, function(err, subscription) {
-                      if (err) { reject(err); }                      else {
-                        assinatura.updateAttributes({
-                          cartao_id: cartao.id,
-                        }, function(err, updatedAssinatura) {
-                          console.log('assinaturaNew', updatedAssinatura);
-                          if (err) { reject(err); }                          else { resolve(updatedAssinatura); }
-                        });
-                      }
-                    });
+                    Mundipagg.updateSubscriptionCard(
+                      assinatura.id,
+                      cartao.id,
+                      function(err, subscription) {
+                        if (err) {
+                          reject(err);
+                        } else {
+                          assinatura.updateAttributes({
+                            cartao_id: cartao.id,
+                          }, function(err, updatedAssinatura) {
+                            console.log('assinaturaNew', updatedAssinatura);
+                            if (err) {
+                              reject(err);
+                            } else {
+                              resolve(updatedAssinatura);
+                            }
+                          });
+                        }
+                      });
                   });
                   // return await assinatura.save();
                 }))
@@ -69,7 +78,12 @@ module.exports = function(Cliente) {
       description: 'Substitui o cartão atual por um novo',
       accepts: [
         {arg: 'ctx', type: 'object', http: {source: 'context'}},
-        {arg: 'data', type: 'object', description: 'Data', http: {source: 'body'}},
+        {
+          arg: 'data',
+          type: 'object',
+          description: 'Data',
+          http: {source: 'body'},
+        },
       ],
       returns: {
         arg: 'data', type: 'Cartao', root: true,

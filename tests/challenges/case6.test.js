@@ -1,10 +1,12 @@
-/* global beforeAll */
+/* global beforeAll, jest */
 'use strict';
 
 const request = require('supertest');
 var assert = require('assert');
 var faker = require('faker');
 const app = require('../../server/server');
+
+jest.setTimeout(30000);
 
 describe('Case 6', () => {
   let planoId = null;

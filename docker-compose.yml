@@ -11,6 +11,7 @@ services:
     network_mode: "host"
     container_name: mundipaggi_api_container
     command: forever server/server.js
+    env_file: .env
   mongo:
     image: mongo:3
     ports:

@@ -37,7 +37,7 @@
     "public": false
   },
   "Cliente": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": true,
     "options": {
       "remoting": {
@@ -53,11 +53,11 @@
     }
   },
   "Cartao": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": false
   },
   "Assinatura": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": true,
     "options": {
       "remoting": {
@@ -73,11 +73,20 @@
     "public": false
   },
   "Plano": {
-    "dataSource": "db",
-    "public": true
+    "dataSource": "mongo",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "create": true,
+          "find": true
+        }
+      }
+    }
   },
   "Pedido": {
-    "dataSource": "db",
+    "dataSource": "mongo",
     "public": true,
     "options": {
       "remoting": {
