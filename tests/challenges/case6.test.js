@@ -39,7 +39,7 @@ describe('Case 6', () => {
           .send({
             'cliente': {
               'nome': 'Mario ' + faker.name.lastName(),
-              'email': 'mario@gmail.com',
+              'email': faker.internet.email(),
             },
             'cartao': {
               'numero': '4012888888881881',

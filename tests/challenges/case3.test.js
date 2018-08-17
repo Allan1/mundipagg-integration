@@ -17,7 +17,7 @@ describe('Case 3', () => {
       .post('/api/clientes')
       .send({
         'nome': 'Pedro ' + faker.name.lastName(),
-        'email': 'pedro@gmail.com',
+        'email': faker.internet.email(),
       })
       .expect(200)
       .then(response => {

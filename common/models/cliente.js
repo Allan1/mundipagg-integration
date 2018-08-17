@@ -28,14 +28,12 @@ module.exports = function(Cliente) {
           if (err) {
             cb(err);
           } else {
-            console.log('newCartaoId', cartao.id);
             cliente.assinaturas(function(err, assinaturas) {
               if (err) {
                 cb(err);
               } else {
                 assinaturas = assinaturas || [];
-                console.log('assinaturas', assinaturas);
-                Promise.all(assinaturas.map(async (assinatura) => {
+                Promise.all(assinaturas.map(async function(assinatura) {
                   return await new Promise(function(resolve, reject) {
                     Mundipagg.updateSubscriptionCard(
                       assinatura.id,
@@ -47,7 +45,6 @@ module.exports = function(Cliente) {
                           assinatura.updateAttributes({
                             cartao_id: cartao.id,
                           }, function(err, updatedAssinatura) {
-                            console.log('assinaturaNew', updatedAssinatura);
                             if (err) {
                               reject(err);
                             } else {
@@ -59,6 +56,7 @@ module.exports = function(Cliente) {
                   });
                 }))
                 .then((r)=>{
+                  cartao.assinaturas = r;
                   cb(null, cartao);
                 })
                 .catch((err)=>{ cb(err); });

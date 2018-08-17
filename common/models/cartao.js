@@ -6,12 +6,10 @@ module.exports = function(Cartao) {
   Cartao.validatesPresenceOf('cliente_id');
 
   Cartao.observe('before save', function(ctx, next) {
-    console.log('data', ctx.instance);
     if (ctx.isNewInstance === true && ctx.instance.cliente_id) {
       Cartao.app.models.Cliente
         .findById(ctx.instance.cliente_id, function(err, cliente) {
           if (!err) {
-            console.log('titular', cliente.nome);
             ctx.instance.titular = cliente.nome;
           }
           next(err);
